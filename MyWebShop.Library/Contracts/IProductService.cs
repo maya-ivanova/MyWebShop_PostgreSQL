@@ -13,5 +13,6 @@ namespace MyWebShop.Library.Contracts
         Task<IEnumerable<ProductDto>> GetAll(global::Google.Protobuf.WellKnownTypes.Empty request);
         Task<object> GetAll();
         //in the interface we do not implement 'async' , we do only in the child
+        Task Add(ProductDto productDto);
     }
 }

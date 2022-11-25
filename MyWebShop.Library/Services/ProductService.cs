@@ -11,30 +11,43 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Protobuf.Collections;
+using MyWebShop.Library.Common;
+using MyWebShop.Library.Data.Models;
+using System.Data.Entity;
 
 namespace MyWebShop.Library.Services
 {
     public class ProductService : IProductService
     {
         private readonly IConfiguration configuration;
+        private readonly IRepository repo;
 
-        public ProductService(IConfiguration _configuration)
+        public ProductService(IConfiguration _configuration, IRepository _repo)
         {
             configuration = _configuration;
-
+            repo = _repo;
         }
 
 
         public async Task<IEnumerable<ProductDto>> GetAll(global::Google.Protobuf.WellKnownTypes.Empty request)
         {
+            return await repo.AllReadonly<Product>().Select(p => new ProductDto()
+            {
+                Title = p.Title,
+                Type = p.Type,
+                Description = p.Description,
+                Filename = p.Filename,
+                Height = p.Height,
+                Width = p.Width,
+                Price = p.Price,
+                Rating = p.Rating
+            }).ToListAsync();
 
-            var dataPath = configuration.GetSection("DataFiles:Products").Value;
-            
+            //var dataPath = configuration.GetSection("DataFiles:Products").Value;
             //var data = ReadAllTextAsync("bin/Debug/net6.0/Data/products.json");
-            var data = ReadAllTextAsync(dataPath);
+            //var data = ReadAllTextAsync(dataPath);
             //string data = await File.("Data/products.json");
-
-            return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(await data);
+            //return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(await data);
         }
 
         private static async Task<string> ReadAllTextAsync(string filePath)
@@ -66,6 +79,25 @@ namespace MyWebShop.Library.Services
             //string data = await File.("Data/products.json");
 
             return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(await data);
+        }
+
+        public async Task Add(ProductDto productDto)
+        {
+            var product = new ProductDto()
+            {
+                Title = productDto.Title,
+                Type = productDto.Type,
+                Description = productDto.Description,
+                Filename = productDto.Filename,
+                Height = productDto.Height,
+                Width = productDto.Width,
+                Price = productDto.Price,
+                Rating = productDto.Rating
+
+            };
+
+            await repo.AddAsync(product);
+            await repo.SaveChangesAsync();
         }
     }
 }

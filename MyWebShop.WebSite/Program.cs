@@ -6,6 +6,7 @@ using MyWebShop.Library.Services;
 using MyWebShop.Library.Data;
 using Microsoft.EntityFrameworkCore.Design;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
+using MyWebShop.Library.Common;
 
 
 //using Npgsql.EntityFrameworkCore.PostgreSQL;
@@ -32,6 +33,9 @@ namespace MyWebShop.WebSite
 
             builder.Services.AddScoped<IProductService, ProductService>();
 
+            builder.Services.AddScoped<IRepository, Repository>();
+            builder.Services.AddMvc();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -51,8 +55,8 @@ namespace MyWebShop.WebSite
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
