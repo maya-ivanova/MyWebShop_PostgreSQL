@@ -8,27 +8,12 @@
 
   <ItemGroup>
 	  <Protobuf Include="Protos\product.proto" GrpcServices="Server" />
+	  <PackageReference Include="EFCore.NamingConventions" Version="7.0.0" />
 	  <PackageReference Include="Google.Protobuf" Version="3.21.9" />
 	  <PackageReference Include="Google.Protobuf.Tools" Version="3.21.9" />
   <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
   <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-  <PackageReference Include="Microsoft.NetFramework.Analyzers" Version="3.3.2">
-    <PrivateAssets>all</PrivateAssets>
-    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-  </PackageReference>
-  <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
-    <PrivateAssets>all</PrivateAssets>
-    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-  </PackageReference>
-  <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3">
-    <PrivateAssets>all</PrivateAssets>
-    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-  </PackageReference>
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.14" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MyWebShop.Library\MyWebShop.Library.csproj" />
   </ItemGroup>
 
 </Project>

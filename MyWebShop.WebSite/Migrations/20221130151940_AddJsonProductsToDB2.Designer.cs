@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyWebShop.WebSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221123200136_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221130151940_AddJsonProductsToDB2")]
+    partial class AddJsonProductsToDB2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -201,11 +201,13 @@ namespace MyWebShop.WebSite.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasColumnName("login_provider");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("text")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasColumnName("provider_key");
 
                     b.Property<string>("ProviderDisplayName")
@@ -252,11 +254,13 @@ namespace MyWebShop.WebSite.Migrations
                         .HasColumnName("user_id");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasColumnName("login_provider");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasColumnName("name");
 
                     b.Property<string>("Value")
@@ -279,10 +283,12 @@ namespace MyWebShop.WebSite.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
 
                     b.Property<string>("Filename")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("filename");
 
@@ -299,10 +305,12 @@ namespace MyWebShop.WebSite.Migrations
                         .HasColumnName("rating");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("title");
 
                     b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("type");
 

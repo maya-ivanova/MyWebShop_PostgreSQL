@@ -10,13 +10,13 @@ namespace MyWebShop.Library.Models
 {
     public class ProductDto
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Type { get; set; }
-        public string Description { get; set; }
-        public string Filename { get; set; }
+        public string Title { get; set; } = null!;
+        public string Type { get; set; } = null!;
+        public string Description { get; set; } = null!; 
+        public string Filename { get; set; } = null!;
         public int Height { get; set; }
         public int Width { get; set; }
         public decimal Price { get; set; }

@@ -1,8 +1,6 @@
-﻿using Microsoft;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MyWebShop.Library.Models;
-using System.Data.Entity;
 
 namespace MyWebShop.Library.Data
 {
@@ -17,6 +15,6 @@ namespace MyWebShop.Library.Data
         {
             base.OnModelCreating(modelBuilder);
         }
-        public Microsoft.EntityFrameworkCore.DbSet<ProductDto> Products { get; set; }
+        public DbSet<ProductDto> Products { get; set; }
     }
 }
