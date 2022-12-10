@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyWebShop.WebSite.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,10 +57,10 @@ namespace MyWebShop.WebSite.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    title = table.Column<string>(type: "text", nullable: true),
-                    type = table.Column<string>(type: "text", nullable: true),
-                    description = table.Column<string>(type: "text", nullable: true),
-                    filename = table.Column<string>(type: "text", nullable: true),
+                    title = table.Column<string>(type: "text", nullable: false),
+                    type = table.Column<string>(type: "text", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
+                    filename = table.Column<string>(type: "text", nullable: false),
                     height = table.Column<int>(type: "integer", nullable: false),
                     width = table.Column<int>(type: "integer", nullable: false),
                     price = table.Column<decimal>(type: "numeric", nullable: false),
@@ -117,8 +117,8 @@ namespace MyWebShop.WebSite.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    loginprovider = table.Column<string>(name: "login_provider", type: "text", nullable: false),
-                    providerkey = table.Column<string>(name: "provider_key", type: "text", nullable: false),
+                    loginprovider = table.Column<string>(name: "login_provider", type: "character varying(128)", maxLength: 128, nullable: false),
+                    providerkey = table.Column<string>(name: "provider_key", type: "character varying(128)", maxLength: 128, nullable: false),
                     providerdisplayname = table.Column<string>(name: "provider_display_name", type: "text", nullable: true),
                     userid = table.Column<string>(name: "user_id", type: "text", nullable: false)
                 },
@@ -162,8 +162,8 @@ namespace MyWebShop.WebSite.Migrations
                 columns: table => new
                 {
                     userid = table.Column<string>(name: "user_id", type: "text", nullable: false),
-                    loginprovider = table.Column<string>(name: "login_provider", type: "text", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
+                    loginprovider = table.Column<string>(name: "login_provider", type: "character varying(128)", maxLength: 128, nullable: false),
+                    name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>

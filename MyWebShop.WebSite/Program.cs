@@ -1,15 +1,12 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
-using MyWebShop.Library.Contracts;
-using MyWebShop.Library.Services;
-using MyWebShop.Library.Data;
 using Microsoft.EntityFrameworkCore.Design;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
-
-
-//using Npgsql.EntityFrameworkCore.PostgreSQL;
-
+using MyWebShop.Library.Contracts;
+using MyWebShop.Library.Services;
+using MyWebShop.Library.Common;
+using Microsoft.AspNetCore.Identity;
+using MyWebShop.Library.Data;
 
 namespace MyWebShop.WebSite
 {
@@ -26,11 +23,13 @@ namespace MyWebShop.WebSite
                 options.UseNpgsql(connectionString, b => b.MigrationsAssembly("MyWebShop.WebSite")).UseSnakeCaseNamingConvention());
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<IProductService, ProductService>();
+
+            builder.Services.AddScoped<IRepository, Repository>();
+            builder.Services.AddMvc();
 
             var app = builder.Build();
 
@@ -51,8 +50,8 @@ namespace MyWebShop.WebSite
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+           app.UseAuthentication();
+           app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
